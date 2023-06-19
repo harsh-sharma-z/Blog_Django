@@ -79,10 +79,8 @@ class RegisterView(APIView):
             user_obj.set_password(data.get('password'))
             user_obj.save()
             token = generate_random_string(20)
-            # set verified user
             Profile.objects.create(user=user_obj, token=token,
                                    is_verified=True)
-            # send_mail_to_user(token , data.get('username'))
             response['message'] = 'User created '
             response['status'] = 200
         except Exception as e:
